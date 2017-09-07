@@ -1,0 +1,20 @@
+<% unless @similar_items.empty? %>
+  <div class="panel clearfix">
+    <h3>Similar Items</h3>
+      <div class="row">
+        <% @similar_items.each do |item| %>
+          <div class="small-2 columns">
+            <% if item.picture.length == 0 %>
+              <%= image_tag 'placeholder.png'%>
+            <% else %>
+              <%= image_tag item.picture%>
+            <% end %>
+            <br>
+            <h5 class="inline"><%= link_to item.name, item_path(item)%></h5>
+            <br>
+            <h6 class="price"><%= number_to_currency item.current_price%></h6>
+          </div>
+        <% end %>
+      </div>
+  </div>
+<% end %>

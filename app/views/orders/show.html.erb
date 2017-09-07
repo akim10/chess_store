@@ -1,0 +1,83 @@
+<br>
+
+<div class="row">
+  <div class="small-5 columns">
+    <h3>Order Details</h3>
+  </div>
+</div>
+<div class="row">
+  <div class="panel" id="order_logistics">
+    <div class="small-3 columns">
+      <strong>Ordered by</strong> <h5><%= @order.user.proper_name %> </h5>
+    </div>
+    <div class="small-4 columns">
+      <strong>School</strong> <h5> <%= @order.school.name %></h5> 
+    </div>
+    <div class="small-3 columns">
+      <strong>Ordered on</strong> <h5> <%= @order.date.strftime("%B %d, %Y") %></h5>
+    </div>
+    <div class="small-2 columns">
+      <strong>Grand Total</strong> <h5> <%= number_to_currency @order.grand_total %></h5>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="small-8 columns">
+    <h3>Items in Order</h3>
+    <div class="panel">
+      <div class="row">
+        <% @order.order_items.each do |order_item| %>
+          <div class="small-3 columns">
+            <% if order_item.item.picture.length == 0 %>
+              <%= image_tag 'placeholder.png'%>
+            <% else %>
+              <%= image_tag order_item.item.picture%>
+            <% end %>
+          </div>
+
+
+          <div class="small-7 columns">
+            <h5><strong><%= order_item.item.name %></strong></h5>
+            <p class="price"><%= number_to_currency order_item.item.item_prices.for_date(@order.date).wholesale.first.price %></p>
+            <p>Quantity: <%= order_item.quantity %></p>
+            <p>Subtotal: <%= number_to_currency order_item.subtotal(@order.date) %></p>
+            <hr>
+          </div>
+          <% if current_user.role? :admin or current_user.role? :manager or current_user.role? :shipper%>
+            <div class="small-2 columns">
+              <% if order_item.shipped_on.nil? %>
+
+                <%= link_to nonajax_ship_path(id: order_item.id), class: 'button radius tiny' do%>
+                  Ship
+                <% end %>
+              <% else %>
+                  <span class="price">Shipped!</span>
+              <% end %> 
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="small-3  small-push-1 columns">
+    <h3> Order Summary </h3>
+    <div class="row">
+      <div class="panel">
+        <p> Item(s) Subtotal: <%= number_to_currency @order.grand_total - @order.shipping_costs %> </p>
+        <p> Shipping Fees: <%= number_to_currency @order.shipping_costs %> </p>
+      </div>
+    </div>
+    <% if current_user.role? :admin or current_user.id == @order.user.id%>
+      <% if @orders_not_shipped.include? @order %>
+        <div class="row">
+            <%= link_to @order, method: :delete, class: 'button radius alert' do %>
+              Cancel Order
+            <% end %>
+        </div>
+      <% end %> 
+    <% end %>     
+  </div>
+
+</div>
+<br>
+<hr>

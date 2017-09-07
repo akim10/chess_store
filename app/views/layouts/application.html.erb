@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Chess Warehouse :: <%= controller.controller_name.capitalize %></title>
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "vendor/modernizr" %>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body>
+    <div id="title_area">
+    </div>
+      <% if current_user.nil? or current_user.role? :customer %>
+        <%= render :partial => "partials/nav" %>
+      <% else %>
+        <%= render :partial => "partials/employee_nav" %>
+      <% end %>
+  
+
+    <!-- main content -->
+    <%= render :partial => "partials/flash" %>
+    <%= yield %>
+
+    <footer>
+      <div class="small-12 columns" id="footer">
+        <%= render partial: 'partials/footer' %>
+      </div>
+    </footer> 
+    <%= javascript_include_tag "application" %>
+  </body>
+</html>

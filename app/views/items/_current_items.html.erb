@@ -1,0 +1,17 @@
+<% unless items.nil? || items.empty? %>
+      <div class="row">
+        <% items.each do |item| %>
+          <div class="small-3 columns itemInfo">
+            <%= link_to image_tag('placeholder.png'), item_path(item) %>
+            <br>
+            <h5 class="inline"><%= link_to item.name, item_path(item)%></h5>
+            <br>
+            <h6 class="price inline"><%= number_to_currency item.current_price%></h6>
+            <% if current_user.nil? %>
+            <% elsif current_user.role? :manager or current_user.role? :admin or current_user.role? :shipper%>
+              <h6 class="float-right inline"><strong><%= item.inventory_level%></strong> in stock</h6>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+<% end %>

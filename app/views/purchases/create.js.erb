@@ -1,0 +1,6 @@
+$('#new_purchase').remove();
+$("#new_purchase_link<%=@item.id%>" ).show();
+
+$('#stock_of_item').replaceWith('<%= j render("items/stock_of_item") %>');
+
+$('#reorder_list').replaceWith('<%= j render("home/items_to_reorder") %>');

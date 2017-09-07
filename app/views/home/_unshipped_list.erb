@@ -1,0 +1,41 @@
+<div id="unshipped_list">
+  <br>
+  <div class="row">
+    <div class="small-10 small-push-1 columns">
+    <h5>Unshipped Orders</h5>
+
+    <% unless @unshipped_order_items.nil? || @unshipped_order_items.empty? %>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th width="200">Name</th>
+              <th width="250" class="centerText">Customer</th>
+              <th width="325" class="centerText">School</th>
+              <th width="200" class="centerText">Subtotal</th>
+              <th width="150" class="centerText"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @unshipped_order_items.each do |order_item| %>
+                <tr>
+                  <td><%= link_to order_item.item.name, item_path(order_item.item) %></td>
+                  <td class="centerText"><%= order_item.order.user.proper_name %></td>
+                  <td class="centerText"><%= order_item.order.school.name %></td>
+                  <td class="centerText"><%= number_to_currency order_item.subtotal %></td>
+                  <td>
+                  <%= link_to ship_path(id: order_item.id), remote: true, class: 'button tiny' do %>
+                    Ship
+                  <% end %>
+                  </td>
+
+                </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% else %>
+      <p>There are no unshipped orders right now!</p>
+    <% end %>
+  </div>
+</div>
+

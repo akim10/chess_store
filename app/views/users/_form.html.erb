@@ -1,0 +1,80 @@
+<%= simple_form_for @user do |f| %>
+	<% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being created:</h2>
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="small-6 columns">
+  	<p>
+      <%= f.label :first_name %><br />
+      <%= f.text_field :first_name %>
+    </p>
+  </div>
+  <div class="small-6 columns">
+    <p class="inline">
+      <%= f.label :last_name %><br />
+      <%= f.text_field :last_name %>
+    </p>
+  </div>
+  <div class="small-12 columns">
+    <p>
+      <%= f.label :email, "Email Address" %><br />
+      <%= f.text_field :email %>
+    </p>
+  </div>
+  <div class="small-12 columns">
+    <p>
+      <%= f.label :username %><br />
+      <%= f.text_field :username %>
+    </p>
+  </div>
+  <div class="small-6 columns">
+    <% if @user.new_record? %>
+      <p>
+        <%= f.label :password %><br />
+        <%= f.password_field :password %>
+      </p>
+    <% end %>
+  </div>
+  <div class="small-6 columns">
+    <% if @user.new_record? %>
+      <p>
+        <%= f.label :password_confirmation, "Confirm Password" %><br />
+        <%= f.password_field :password_confirmation %>
+      </p>
+    <% end %>
+  </div>
+  <div class="small-12 columns">
+  	<p>
+      <%= f.label :phone, "Phone Number" %><br />
+      <%= f.text_field :phone %>
+    </p>
+  </div>
+  <div class="small-12 columns">
+     <% if can? :create, :user %>
+      <p>
+        <%= f.label :role %><br />
+        <%= f.select :role, User::ROLES, :prompt => "Select ..." %>
+      </p>
+    <% else %>
+        <% @user.role = "customer" %>
+    <% end %>
+  </div>
+
+  <div class="small-12 columns">
+     <% if can? :create, :user %>
+      <%= f.input :active %>
+    <% end %>
+  </div>
+
+  <div class="small-12 columns">
+    <p><%= f.submit (@user.new_record? ? "Sign up" : "Update") %></p>
+  </div>
+
+<% end %>
+

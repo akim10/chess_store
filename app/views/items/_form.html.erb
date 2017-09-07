@@ -1,0 +1,18 @@
+<br>
+<%= simple_form_for @item, :html => { :multipart => true } do |item_form| %>
+  <div class="panel">
+    <h3><%= controller.action_name.capitalize %> Item</h3>
+    <hr>
+    <div class="form-offset">
+      <%= render :partial => "item_fields", :locals => { :f => item_form } %>
+      <hr>
+    </div>
+
+
+    <br>
+    <div class="form-actions">
+      <%= item_form.submit nil, :class => 'button small radius create-item' %> &nbsp;&nbsp;
+      <%= link_to 'Cancel', @item, :class => 'button small alert radius' %>
+    </div>
+  </div>
+<% end %>

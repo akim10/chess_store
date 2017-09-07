@@ -1,0 +1,31 @@
+<h5><strong>Pending Orders</strong></h5>
+
+<% unless @pending_orders.nil? || @pending_orders.empty? %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th width="200">Date</th>
+        <th width="325" class="centerText">School</th>
+        <th width="200" class="centerText">Grand Total</th>
+        <th width="100" class="centerText"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @pending_orders.each do |order| %>
+        <tr>
+          <td><%= link_to order.date.strftime("%B %d, %Y"), order_path(order) %></td>
+          <td class="centerText"><%= order.school.name %></td>
+          <td class="centerText"><%= number_to_currency order.grand_total %></td>
+	      <td>
+		      <%= link_to order, method: :delete, class: 'button tiny radius alert' do %>
+		        Cancel
+		      <% end %>
+	      </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<% else %>
+<p>There are no pending orders at this time.</p>
+<% end %>

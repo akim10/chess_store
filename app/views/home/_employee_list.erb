@@ -1,0 +1,41 @@
+<br>
+<div class="row">
+  <div class="small-10 small-push-1 columns">
+    <h4>Employee List</h4>
+  
+
+  <% unless @employees.nil? || @employees.empty? %>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th width="175" class="centerText">Name</th>
+            <th width="100" class="centerText">Username</th>
+            <th width="250" class="centerText">Email</th>
+            <th width="150" class="centerText">Phone Number</th>
+            <th width="100" class="centerText">Role</th>
+            <th width="100" class="centerText"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @employees.each do |e| %>
+            <tr>
+              <td><%= link_to e.proper_name, user_path(e) %></td>
+              <td class="centerText"><%= e.username %></td>
+              <td class="centerText"><%= e.email %></td>
+              <td class="centerText"><%= e.phone %></td>
+              <td class="centerText"><%= e.role %></td>
+              <td class="centerText">
+                <%= link_to edit_user_path(e), class: 'button tiny' do %>
+                  Edit
+                <% end %>
+              </td>
+
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <p>There are no users in the system at this time.</p>
+  <% end %>
+</div>

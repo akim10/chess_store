@@ -1,0 +1,11 @@
+<% if current_user.nil? %>
+    <%= render :partial => 'general_home' %>
+<% elsif current_user.role? :shipper %>
+    <%= render :partial => 'unshipped_list' %>
+<% elsif current_user.role? :manager %>
+    <%= render :partial => 'manager_dashboard'%>
+<% elsif current_user.role? :admin %>
+    <%= render :partial => 'admin_dashboard' %>
+<% else %>
+    <%= render :partial => 'general_home' %>
+<% end %>

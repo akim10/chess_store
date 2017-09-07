@@ -1,0 +1,12 @@
+<div id="manufacturer_price_history">
+  <% unless @manufacturer_price_history.empty? %>
+      <div class="panel clearfix price_history_panel">
+        <h5>Manufacturer Price History</h5>
+        <ul>
+          <% @manufacturer_price_history.each do |change| %>
+            <%= number_to_currency change.price %>&nbsp;&nbsp;&nbsp;(<%= change.start_date.strftime('%m/%d/%y') %>)<br />
+          <% end %>
+        </ul>
+      </div>
+  <% end %>
+</div>

@@ -1,0 +1,31 @@
+<h5><strong>Past Orders</strong></h5>
+
+<% unless @past_orders.nil? || @past_orders.empty? %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th width="200">Date</th>
+        <th width="325" class="centerText">School</th>
+        <th width="200" class="centerText">Grand Total</th>
+        <th width="100" class="centerText"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @past_orders.each do |order| %>
+        <tr>
+          <td><%= link_to order.date.strftime("%B %d, %Y"), order_path(order) %></td>
+          <td class="centerText"><%= order.school.name %></td>
+          <td class="centerText"><%= number_to_currency order.grand_total %></td>
+	      <td>
+		      <%= link_to order, class: 'button tiny radius' do %>
+		        Details
+		      <% end %>
+	      </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<% else %>
+<p>No orders have been shipped yet!</p>
+<% end %>

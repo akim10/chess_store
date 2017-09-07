@@ -1,0 +1,17 @@
+<% if can? :create, :item %> 
+    <% unless @inactive_items.empty? %>
+          <% @inactive_items.each do |item| %>
+            <div class="small-3 columns itemInfo">
+              <%= link_to image_tag('placeholder.png'), item_path(item) %>
+              <br>
+              <h5 class="inline"><%= link_to item.name, item_path(item)%></h5>
+              <br>
+              <h6 class="inline">N/A</h6>
+              <% if can? :manage, :item %>
+                <h6 class="float-right inline"><strong><%= item.inventory_level%></strong> in stock</h6>
+              <% end %>
+            </div>
+          <% end %>
+      </div>
+    <% end %>
+<% end %>

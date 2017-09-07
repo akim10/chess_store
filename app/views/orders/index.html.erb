@@ -1,0 +1,39 @@
+<br>
+<div class="row">
+  <div class="small-10 small-push-1 columns">
+  <h5>Orders</h5>
+
+  <% unless @orders.nil? || @orders.empty? %>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th width="200">Date</th>
+            <th width="250" class="centerText">Customer</th>
+            <th width="325" class="centerText">School</th>
+            <th width="200" class="centerText">Grand Total</th>
+            <!-- <th width="100" class="centerText">Shipped</th> -->
+          </tr>
+        </thead>
+        <tbody>
+          <% @orders.each do |order| %>
+            <tr>
+              <td><%= link_to order.date.strftime("%B %d, %Y"), order_path(order) %></td>
+              <td class="centerText"><%= order.user.proper_name %></td>
+              <td class="centerText"><%= order.school.name %></td>
+              <td class="centerText"><%= number_to_currency order.grand_total %></td>
+              <!-- <td class="centerText"> -->
+
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <p>There have been no orders placed.</p>
+  <% end %>
+</div>
+<br>
+<ul class="pagination centerText" id="pages">
+  <%= will_paginate @users, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>
+</ul>

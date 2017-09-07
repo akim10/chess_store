@@ -1,0 +1,10 @@
+<%= f.input :name, input_html: {class: "avg"} %>
+<%= f.input :description, input_html: { :rows => 4, class: "avg" } %>
+<%= f.input :category, collection: Item::CATEGORIES, include_blank: true, input_html: {class: "avg"} %>
+<%= f.input :color, input_html: {class: "avg"} %>
+<%= f.input :weight, input_html: {class: "avg"} %>
+<% if controller.action_name == "new" %>
+  <%= f.input :inventory_level, input_html: {class: "avg"} %>
+<% end %>
+<%= f.input :reorder_level, input_html: {class: "avg"} %>
+<%= f.file_field :picture %>

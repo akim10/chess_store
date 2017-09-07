@@ -1,0 +1,22 @@
+<div id="inventory_level">
+  <div class="panel clearfix">
+    <!-- <h3>Purchase</h3> -->
+    <p class="centerText"> <b>Reorder Level</b>: <%= @item.reorder_level.nil? ? 'N/A' : @item.reorder_level %></p>
+    <!-- <hr> --> 
+    <% if @item.inventory_level.nil? %>
+      <%= 'N/A' %>
+    <% else %>
+      <%= render :partial => "stock_of_item"%>
+    <% end %>
+
+    <p class="centerText">
+    <% if current_user.role? :manager or current_user.role? :admin%>
+      <%= link_to(new_purchase_path(item_id: @item.id, id: "new_purchase_link#{@item.id}"), id: "new_purchase_link#{@item.id}", class: 'button tiny radius success', remote: true) do %>
+           Make Purchase
+      <% end %>
+    <% end %>
+    </p>
+  </div>
+  
+
+</div>

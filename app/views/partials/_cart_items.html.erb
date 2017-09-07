@@ -1,0 +1,57 @@
+<h4> Cart </h4>
+<% @cart_items.each do |i| %>
+  <div class="row">
+    <div class="small-3 columns">
+      <% if i.item.picture.length == 0 %>
+        <%= image_tag 'placeholder.png'%>
+      <% else %>
+        <%= image_tag i.item.picture%>
+      <% end %>
+    </div>
+    <div class="small-9 columns"> 
+      <div class="row">
+        <div class="small-8 columns">
+          <span><strong><%= link_to i.item.name, item_path(i.item)%></strong></span>
+        </div>
+        <div class="small-4 columns align-right">
+          <span class="price"><%=number_to_currency i.item.price_on_date(Date.today)%></span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="small-6 columns">
+          <span> <strong>Quantity:</strong>  <%=i.quantity%> </span>
+        </div>
+        <div class="small-6 columns align-right">
+          <span> <strong>Subtotal:</strong> <%=number_to_currency i.subtotal(Date.today)%> </span>
+        </div>
+      </div>
+
+      <%= link_to(remove_from_cart_path(i.item), class: 'button alert') do %>
+        Remove
+      <% end %>
+
+      <br>
+
+    </div>
+      
+    <br>
+    <!-- <hr> -->
+
+  </div>
+  <hr>
+<% end %>
+  <div class="row">
+    <div class="small-6 small-push-6 columns align-right">
+      <strong>Shipping Cost</strong>: <%= number_to_currency @shipping_costs %>
+      <br>
+      <strong>Grand Total</strong>: <%= number_to_currency @grand_total %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-12 columns align-right">
+      <%= link_to(checkout_path, class: 'button success', id: "checkout-button") do %>
+        Checkout
+      <% end %>
+    </div>
+  </div>
+

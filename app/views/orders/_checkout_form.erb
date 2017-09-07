@@ -1,0 +1,40 @@
+<%= form_for @order, html: { class: 'form-horizontal' } do |f| %>
+  <% if @order.errors.any? %>
+    <div id="error_explanation">
+      <h3><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h3>
+
+      <ul>
+      <% @order.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="panel">
+    <h4>Shipping and Payment</h4>
+    <hr>
+    <div class="form-offset">
+        <%= f.hidden_field :user_id, :value => current_user.id, input_html: {class: "avg"} %>
+        <%= f.hidden_field :grand_total, :value => @order.grand_total, input_html: {class: "avg"} %>
+        School
+        <%= f.collection_select :school_id, @schools, :id, :name, {:selected => @last_school} %>
+        Is your school not listed here? Add your school <%= link_to 'here', new_school_path %>!
+        <br><hr>
+        Credit Card Number
+        <%= f.text_field :credit_card_number, input_html: {class: "avg"} %>
+        Expiration Month
+        <%= f.select :expiration_month, (1..12), prompt: "Select Month"  %>
+        Expiration Year
+        <%= f.select :expiration_year, (Date.current.year..Date.current.year+5), prompt: "Select Year"%>
+    </div>
+
+    <div class="form-actions">
+      <%= f.submit nil, :class => 'button success', :value => "Place Order" %> &nbsp;&nbsp;
+      <%= link_to 'Cancel', @order, :class => 'button alert' %>
+    </div>
+  </div>
+
+<% end %>
+
+

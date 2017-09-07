@@ -1,0 +1,44 @@
+<br>
+<div class="row">
+  <div class="small-10 small-push-1 columns">
+  <h5>Schools</h5>
+
+  <% unless @schools.nil? || @schools.empty? %>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th width="300">Name</th>
+            <th width="80" class="centerText">State</th>
+            <th width="150" class="centerText">City</th>
+            <th width="150" class="centerText">Zip Code</th>
+            <th width="350" class="centerText">Address</th>
+            <th width="75" class="centerText">Minimum Grade</th>
+            <th width="75" class="centerText">Maximum Grade</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @schools.each do |school| %>
+            <tr>
+              <td><%= link_to school.name, school_path(school) %></td>
+              <td class="centerText"><%= school.state%></td>
+              <td class="centerText"><%= school.city %></td>
+              <td class="centerText"><%= school.zip %></td>
+              <td class="centerText"><%= school.street_1 %></td>
+              <td class="centerText"><%= school.min_grade %></td>
+              <td class="centerText"><%= school.max_grade %></td>
+              <!-- <td class="centerText"> -->
+
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <p>There have been no schools added to the system at this time.</p>
+  <% end %>
+</div>
+<br>
+<ul class="pagination centerText" id="pages">
+  <%= will_paginate @users, previous_label: "Previous&nbsp;", next_label: "&nbsp;Next" %>
+</ul>

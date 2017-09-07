@@ -1,0 +1,33 @@
+<div id="reorder_list">
+  <% unless @items_to_reorder.nil? || @items_to_reorder.empty? %>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th width="375">Name</th>
+            <th width="125" class="centerText">Inventory</th>
+            <th width="125" class="centerText">Reorder Level</th>
+            <th width="100"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @items_to_reorder.each do |item| %>
+            <tr>
+              <td><%= link_to item.name, item_path(item) %></td>
+              <td class="centerText"><%= item.inventory_level %></td>
+              <td class="centerText"><%= item.reorder_level %></td>
+              <td class="centerText">
+
+                <%= link_to(new_purchase_path(item_id: item.id, id: "new_purchase_link#{item.id}"), id: "new_purchase_link#{item.id}", class: 'button tiny radius success', remote: true) do %>
+                  Reorder
+                <% end %>
+
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <p>There are no items that need to be reorder at this time.</p>
+  <% end %>
+</div>

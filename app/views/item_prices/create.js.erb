@@ -1,0 +1,8 @@
+$('#new_item_price').remove();
+$('#new_item_price_link').show();
+
+
+$('#price_history').replaceWith('<%= j render("items/price_history") %>');
+$('#manufacturer_price_history').replaceWith('<%= j render("items/manufacturer_price_history") %>');
+
+$('#price_of_item').replaceWith('<%= j render("items/price_of_item") %>');

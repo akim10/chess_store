@@ -1,0 +1,25 @@
+
+<div id="splash">
+	<div class="row no-top-margin">
+		<div class="small-5 columns">
+			<h3 id="splashText">High-quality chess pieces, boards, clocks, and more!</h3>
+			<br /><br />
+			<p class="centerText"><%= link_to "View Items", items_path, :class => "button large success" %></p>
+		</div>
+	</div>
+</div>
+
+<% if current_user.nil? %>
+<% elsif current_user.role? :customer %>
+	<div class="row">
+		<div class="small-8 small-push-2 columns">
+			<%= render :partial => "pending_orders" %>
+		</div>
+		<hr>
+		<div class="small-8 small-push-2 columns">
+			<%= render :partial => "past_orders" %>
+		</div>
+	</div>
+<br>
+	
+<% end %>

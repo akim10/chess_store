@@ -1,0 +1,32 @@
+<div class="row">
+
+  <div class="small-6 small-push-3 columns">
+    <br><br><br><br><br>
+      <div class="panel">
+        <h3>Log In</h3>
+
+        <%= form_tag sessions_path do %>
+
+        	<div class="control-group">
+            <%= label_tag :email %>
+            <div class="controls">
+              <%= text_field_tag :email, params[:email] %>
+            </div>
+          </div>
+
+        	<div class="control-group">
+            <%= label_tag :password %>
+            <div class="controls">
+              <%= password_field_tag :password %>
+            </div>
+          </div>
+
+          <div class="actions"><%= submit_tag "Log In" %></div>
+        <% end %>
+      </div>
+    <hr>
+    <p class="centerText"> Don't have an account? <%= link_to "Sign Up", signup_path %>.</p>
+    <br><br><br><br>
+  </div>
+
+</div>

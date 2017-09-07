@@ -1,0 +1,67 @@
+<%= simple_form_for @school do |f| %>
+    <% if @school.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@school.errors.count, "error") %> prohibited this school from being created:</h2>
+        <ul>
+        <% @school.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+  <div class="small-12 columns">
+    <p>
+      <%= f.label :name %><br />
+      <%= f.text_field :name %>
+    </p>
+  </div>
+  <div class="small-12 columns">
+    <p>
+      <%= f.label :street_1 %><br />
+      <%= f.text_field :street_1 %>
+    </p>
+  </div>
+  <div class="small-12 columns">
+    <p>
+      <%= f.label :street_2 %><br />
+      <%= f.text_field :street_2 %>
+    </p>
+  </div>
+  <div class="small-6 columns">
+    <p>
+      <%= f.label :city %><br />
+      <%= f.text_field :city %>
+    </p>
+  </div>
+  <div class="small-6 columns">
+    <p class="inline">
+      <%= f.label :zip %><br />
+      <%= f.number_field :zip %>
+    </p>
+  </div>
+  <div class="small-12 columns">
+    <p>
+      <%= f.label :state %><br />
+      <%= f.select :state, School::STATES_LIST, :prompt => "Select ..." %>
+    </p>
+  </div>
+  <div class="small-6 columns">
+    <p>
+      <%= f.label :min_grade %><br />
+      <%= f.select :min_grade, (0..12), :prompt => "Select ..." %>
+    </p>
+  </div>
+  <div class="small-6 columns">
+    <p class="inline">
+      <%= f.label :max_grade %><br />
+      <%= f.select :max_grade, (0..12), :prompt => "Select ..." %>
+    </p>
+  </div>
+  <div class="small-12 columns">
+    <div class="form-actions">
+      <%= f.submit nil, :class => 'button small radius school-button' %> &nbsp;&nbsp;
+    </div>
+  </div>
+<% end %>
+

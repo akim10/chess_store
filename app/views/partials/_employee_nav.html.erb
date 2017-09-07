@@ -1,0 +1,72 @@
+<div class="contain-to-grid">
+
+  <nav class="top-bar" data-topbar role="navigation" data-options="is_hover: false">
+    <section class="top-bar-section">
+      <ul class="left">
+
+        <!-- link to home -->
+        <li><%= link_to "Chess Warehouse", home_path %></li>
+
+
+        <!-- options for items -->
+        <li>
+          <%= link_to "Orders", orders_path %>
+        </li>
+
+        <% if current_user.role? :admin or current_user.role? :manager %>
+          <!-- options for purchases -->
+          <li>
+            <%= link_to "Users", users_path %>
+          </li>
+        <% end %>
+
+        <!-- options for prices -->
+        <li>
+          <%= link_to "Schools", schools_path %>
+        </li>
+
+        <li>
+          <%= link_to "Items", items_path %>
+        </li>
+
+        <!-- options for prices -->
+ 
+
+      </ul>
+
+
+      <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <h4> Your Cart is Empty! </h4>
+        <!-- <percentSign render :partial => "partials/cartItems" %> -->
+      </div>
+
+        <ul class="right">
+          <li> &nbsp; </li><li> &nbsp; </li><li> &nbsp; </li>
+          <% if logged_in? %>
+            <li class="has-dropdown">
+              <a href="#"><%= current_user.proper_name %>:  <%= current_user.role %></a>
+
+              <ul class="dropdown">
+                <li><%= link_to 'User Info', current_user %></li>
+                <li><%= link_to 'Edit Profile', edit_user_path(current_user) %></li>
+                <li id="logout"><%= link_to 'Logout', logout_path %></li>
+              </ul>
+            </li>
+
+          <% else %>
+            <li>
+              <%= link_to 'Login', login_path %>
+            </li>
+          <% end %>
+        </ul>
+
+
+    </section>
+  </nav>
+
+
+
+</div>
+
+

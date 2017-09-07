@@ -1,0 +1,17 @@
+<div id="new_item_price">
+    <%= simple_form_for @item_price, html: { class: 'form-horizontal' }, remote: true do |f| %>
+        <%= f.input :price, label: 'New Price', input_html: {class: "avg"} %>
+
+        <%= f.input :item_id, as: :hidden, input_html: { value: params[:item_id] } %>
+        <% if current_user.role? :admin %>
+            <%= f.select :category, ItemPrice::CATEGORIES, :prompt => "Select ..." %>
+        <% elsif current_user.role? :manager %>
+            <%= f.input :category, as: :hidden, input_html: { value: "manufacturer" } %>
+        <% end %>
+
+        <div class="form-actions">
+          <%= f.submit nil, :class => 'button tiny radius', :id => "price_button" %>
+          <%= link_to 'Cancel', item_path(params[:item_id]), :class => 'button tiny alert radius' %>
+        </div>
+    <% end %>
+</div>

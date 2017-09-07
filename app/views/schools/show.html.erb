@@ -1,0 +1,59 @@
+<br>
+
+<div class="row">
+</div>
+<div class="row">
+  <div class="small-10 small-push-1 columns">
+    <h3><%= @school.name %></h3>
+    <div class="panel" id="school_info">
+      <div class="small-7 columns">
+        <strong>Address</strong> <h5> <%= @school.street_1%>, <%= @school.street_2%></h5> 
+        <h5><%= @school.city %>, <%= @school.state %>, <%= @school.zip %></h5>
+      </div>
+      <div class="small-2 columns">
+        <strong>Min. Grade</strong> <h5> <%= @school.min_grade%></h5> 
+      </div>
+      <div class="small-2 columns">
+        <strong>Max. Grade</strong> <h5> <%= @school.max_grade%></h5>
+      </div>
+    </div>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="small-10 small-push-1 columns">
+    <h3> School Order History </h3>
+    <% unless @order_history.nil? || @order_history.empty? %>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th width="200" class="centerText">Date</th>
+            <th width="325" class="centerText">Placed By</th>
+            <th width="150" class="centerText">Grand Total</th>
+            <th width="100" class="centerText">Shipped</th>
+            <th width="150" class="centerText"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @order_history.each do |order| %>
+            <tr>
+              <td><%= order.date.strftime("%B %d, %Y") %></td>
+              <td class="centerText"><%= order.user.name %></td>
+              <td class="centerText"><%= number_to_currency order.grand_total %></td>
+              <td class="centerText"> -- </td>
+              <td class="centerText">
+                <%= link_to order_path(order), class: 'button tiny' do %>
+                  Order Details
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p>There have been no orders placed for this school.</p>
+      <p> &nbsp; </p>      <p> &nbsp; </p>      <p> &nbsp; </p>      <p> &nbsp; </p>
+    <% end %>
+  </div>
+</div>
+

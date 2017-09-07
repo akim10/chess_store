@@ -1,0 +1,13 @@
+  <div class="panel">
+    <h5 class="centerText">Buy This Item</h5>
+<!--     <hr>
+    <p>
+      <label for="spinner">Quantity:</label>
+      <br>
+      <input type="number" id="spinner" name="value">
+    </p> -->
+    <hr>
+    <p class="centerText"><%= link_to(add_to_cart_path(@item), method: :post, class: 'button', id: "add_to_cart_button") do %>
+      Add to Cart
+    <% end %></p>
+  </div>

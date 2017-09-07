@@ -1,0 +1,5 @@
+<% if current_user.nil? %>
+  <%= render :partial => "new_school_for_signup" %>
+<% else %>
+  <%= render :partial => "new_school_for_checkout" %>
+<% end %>

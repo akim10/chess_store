@@ -1,0 +1,84 @@
+<br>
+<div class="row">
+  <div class="small-7 columns">
+    <ul class="breadcrumbs">
+      <li><%= link_to "Home", home_path%></li>
+      <li><%= link_to "Items", items_path%></li>
+      <li class="current"><a href="#"><%= @item.name%></a></li>
+    </ul>
+  </div>
+  <div class="small-5 columns">
+    <!-- Add buttons to list all, edit project or destroy object -->
+    <% if current_user.nil? %>
+    <% elsif current_user.role? :manager or current_user.role? :admin %>
+        <%= render partial: "partials/object_options", locals: {model_name: "item", object: @item}  %>
+    <% end %>
+  </div>
+</div>
+
+<hr>
+
+<div class="row">
+  <!-- <div class="row"> -->
+    <div class="small-4 columns">
+        <% if @item.picture.length == 0 %>
+          <%= image_tag 'placeholder.png'%>
+        <% else %>
+          <%= image_tag @item.picture%>
+        <% end %>
+    </div>
+    <div class="small-5 columns">
+      <h3><%= @item.name %></h3>
+
+      <p class="inline">
+        <%= render :partial => "price_of_item"%>
+      </p>
+
+      <p>
+        <%= @item.description %>
+      </p>
+
+      <p>
+        <b>Color</b>: <%= @item.color.nil? ? 'N/A' : @item.color %>
+      </p>
+
+      <p>
+        <b>Total weight</b>: <%= @item.weight.nil? ? 'N/A' : @item.weight %> lbs.
+      </p>
+    </div>
+  <!-- </div> -->
+  <% if current_user.nil? %>
+  <% elsif current_user.role? :customer %>
+    <div class="small-3 columns">
+      <%= render :partial => "add_to_cart"%>
+    </div>
+  <% elsif current_user.role? :manager %>
+    <div class="small-3 columns">
+      <%= render :partial => "inventory"%>
+      <%= render :partial => "price_history"%>
+      <%= render :partial => "manufacturer_price_history"%>
+      <%= link_to(new_item_price_path(item_id: @item.id), id: 'new_item_price_link', class: 'button small radius float-right', remote: true) do %>
+        Change Price
+      <% end %>
+    </div>
+  <% elsif current_user.role? :admin %>
+    <div class="small-3 columns">
+      <%= render :partial => "add_to_cart"%>
+    </div>
+    <div class="small-3 columns">
+      <%= render :partial => "inventory"%>
+      <%= render :partial => "price_history"%>
+      <%= render :partial => "manufacturer_price_history"%>
+      <%= link_to(new_item_price_path(item_id: @item.id), id: 'new_item_price_link', class: 'button small radius float-right', remote: true) do %>
+        Change Price
+      <% end %>
+    </div>
+  <% elsif current_user.role? :shipper %>
+    <div class="small-3 columns">
+      <%= render :partial => "inventory"%>
+    </div>
+  <% end %>
+
+</div>
+<br>
+<hr>
