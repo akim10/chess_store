@@ -6,8 +6,9 @@ Final Project for 67-272: Application Design and Development
 1. Navigate to the folder in terminal.
 2. Run 'bundle install' to install the gems used in this project
 3. Run 'rake db:migrate'.
-4. Run 'rails server'
-5. Go to 'localhost:3000' in your browser
+4. Run 'rake db:populate'.
+5. Run 'rails server'
+6. Go to 'localhost:3000' in your browser
 
 Create an account to browse the site as a customer.
 
